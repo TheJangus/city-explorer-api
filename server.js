@@ -23,47 +23,47 @@ const PORT = process.env.PORT || 3002;
 // 3002 - if my server is up on 3002, then i know there is something wrong with my .env file or i dont bring in dotenv library
 
 //*****ENDPOINTS*********//
-
+          
 //base endpoint
 
-app.get('/weather', weatherbitIoData);
+app.get('/weather', weatherbitIoData);  
 app.get('/movies', movieInformation);
 
-app.get('/', (request, response) => {
+app.get('/', (request, response) => {     
     console.log('This is showing up in my terminal');
     response.status(200).send('Welcome to my server');
 });
 
-app.get('/hello', (request, response) => {
-    console.log(request.query);
-    let firstName = request.query.firstName;
-    let lastName = request.query.lastName;
-    response.status(200).send('Well hello you ${firstName} ${lastName}! Welcome to my server');
-});
+// app.get('/hello', (request, response) => {
+//     console.log(request.query);
+//     let firstName = request.query.firstName;
+//     let lastName = request.query.lastName;
+//     response.status(200).send('Well hello you ${firstName} ${lastName}! Welcome to my server');
+// });
 
 
 
-app.get('/weather', (request, response, next)=> {
-    console.log(request);
-    let cityName = request.query.cityName;
-    let lat = request.query.lat;
-    let lon = request.query.lon;
-    try {
-        let city = data.find(city => city.city_name === cityName);
-        let gtoomedData = cityData.data.map(day => new Forecast(day));
-        response.status(200).send(groomedData);
-    } catch (error) {
-        next(error);
-    }
-})
+// app.get('/weather', (request, response, next)=> {
+//     console.log(request);
+//     let cityName = request.query.cityName;
+//     let lat = request.query.lat;
+//     let lon = request.query.lon;
+//     try {
+//         let city = data.find(city => city.city_name === cityName);
+//         let gtoomedData = cityData.data.map(day => new Forecast(day));
+//         response.status(200).send(groomedData);
+//     } catch (error) {
+//         next(error);
+//     }
+// })
 
 
-class Forecast {
-    constructor(dayObj){
-        this.date = dayObj.datetime;
-        this.description = dayObj.weather.description;
-    }
-}
+// class Forecast {
+//     constructor(dayObj){
+//         this.date = dayObj.datetime;
+//         this.description = dayObj.weather.description;
+//     }
+// }
 
 //catch all and should live at the bottom
 app.get('*', (request, response) => {
